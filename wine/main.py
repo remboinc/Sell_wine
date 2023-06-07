@@ -7,12 +7,12 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
-def get_wines(wines_from_excel):
-    wines_ = defaultdict(list)
-    for item in wines_from_excel:
-        category = item['Категория']
-        wines_[category].append(item)
-    wines = dict(wines_)
+def group_wines_by_category(wines_from_excel):
+    wines_by_category = defaultdict(list)
+    for card in wines_from_excel:
+        category = card['Категория']
+        wines_by_category[category].append(card)
+    wines = dict(wines_by_category)
     return wines
 
 
@@ -47,7 +47,7 @@ def main():
     wines_from_excel = pandas.read_excel(path_to_file, keep_default_na=False).to_dict(orient='records')
 
     rendered_page = template.render(
-        wines=get_wines(wines_from_excel),
+        wines=group_wines_by_category(wines_from_excel),
         years=get_delta(),
         correct_year=get_correct_year(get_delta()),
     )
