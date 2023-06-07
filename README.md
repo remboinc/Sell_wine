@@ -14,12 +14,18 @@ python3.10 -m venv env
 ```
 
 - Активируйте виртуальное окружение
+На Windows:
+```
+env\Scripts\activate
+```
+На macOS и Linux:
+```
+source env/bin/activate
+```
 
+- Перейдите в директорию проекта и установите зависимости
 ```
-env/bin/activate
-```
-- Установите зависимости
-```
+cd wine
 pip install -r requirements.txt
 ```
 
