@@ -29,7 +29,7 @@ cd wine
 pip install -r requirements.txt
 ```
 
-- Запустите рендеринг шаблона сайта  
+- Запустите рендеринг шаблона сайта из директории `wine/`  
 ```
 python3 main.py
 ```
