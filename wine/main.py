@@ -8,11 +8,11 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
 def get_wines(wines_from_excel):
-    wines_list = defaultdict(list)
+    wines_ = defaultdict(list)
     for item in wines_from_excel:
         category = item['Категория']
-        wines_list[category].append(item)
-    wines = dict(wines_list)
+        wines_[category].append(item)
+    wines = dict(wines_)
     return wines
 
 
