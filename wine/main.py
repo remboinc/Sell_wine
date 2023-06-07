@@ -1,6 +1,8 @@
 import datetime
+import os
 from collections import defaultdict
 import pandas
+from dotenv import load_dotenv
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
@@ -34,13 +36,15 @@ def get_correct_year(numeric):
 
 
 def main():
+    load_dotenv()
+    path_to_file = os.getenv('FILE')
     env = Environment(
         loader=FileSystemLoader('.'),
         autoescape=select_autoescape(['html', 'xml'])
     )
 
     template = env.get_template('template.html')
-    wines_from_excel = pandas.read_excel('wine.xlsx', keep_default_na=False).to_dict(orient='records')
+    wines_from_excel = pandas.read_excel(path_to_file, keep_default_na=False).to_dict(orient='records')
 
     rendered_page = template.render(
         wines=get_wines(wines_from_excel),
