@@ -19,17 +19,17 @@ def group_wines_by_category(wines_from_excel):
 def calculate_year_delta():
     start_year = 1920
     now = datetime.datetime.now()
-    numeric = now.year - start_year
-    return numeric
+    year_delta = now.year - start_year
+    return year_delta
 
 
-def get_correct_year(numeric):
-    numeric = str(numeric)[-2:]
-    if numeric in ('11', '12', '13', '14', '111', '913'):
+def get_correct_year(year_delta):
+    year_delta = str(year_delta)[-2:]
+    if year_delta in ('11', '12', '13', '14', '111', '913'):
         return 'лет'
-    elif numeric[-1] == '1':
+    elif year_delta[-1] == '1':
         return 'год'
-    elif numeric[-1] in ('2', '3', '4'):
+    elif year_delta[-1] in ('2', '3', '4'):
         return 'года'
     else:
         return 'лет'
