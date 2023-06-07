@@ -8,6 +8,20 @@
 ```
 git clone https://github.com/remboinc/Sell_wine.git
 ```
+- Создайте виртуальное окружение в директории проекта
+```
+python3.10 -m venv env
+```
+
+- Активируйте виртуальное окружение
+```
+.env/bin/activate
+```
+- Установите зависимости
+```
+pip install -r requirements.txt
+```
+
 - Запустите рендеринг шаблона сайта командой 
 ```
 python3 main.py
