@@ -16,7 +16,7 @@ def group_wines_by_category(wines_from_excel):
     return wines
 
 
-def get_delta():
+def calculate_year_delta():
     start_year = 1920
     now = datetime.datetime.now()
     numeric = now.year - start_year
@@ -48,8 +48,8 @@ def main():
 
     rendered_page = template.render(
         wines=group_wines_by_category(wines_from_excel),
-        years=get_delta(),
-        correct_year=get_correct_year(get_delta()),
+        years=calculate_year_delta(),
+        correct_year=get_correct_year(calculate_year_delta()),
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
