@@ -4,17 +4,8 @@ import pandas
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-env = Environment(
-    loader=FileSystemLoader('.'),
-    autoescape=select_autoescape(['html', 'xml'])
-)
 
-template = env.get_template('template.html')
-
-wines_from_excel = pandas.read_excel('wine.xlsx', keep_default_na=False).to_dict(orient='records')
-
-
-def get_wines():
+def get_wines(wines_from_excel):
     wines_list = defaultdict(list)
     for item in wines_from_excel:
         category = item['Категория']
@@ -42,14 +33,27 @@ def get_correct_year(numeric):
         return 'лет'
 
 
-rendered_page = template.render(
-    wines=get_wines(),
-    years=get_delta(),
-    correct_year=get_correct_year(get_delta()),
-)
+def main():
+    env = Environment(
+        loader=FileSystemLoader('.'),
+        autoescape=select_autoescape(['html', 'xml'])
+    )
 
-with open('index.html', 'w', encoding="utf8") as file:
-    file.write(rendered_page)
+    template = env.get_template('template.html')
+    wines_from_excel = pandas.read_excel('wine.xlsx', keep_default_na=False).to_dict(orient='records')
 
-server = HTTPServer(('0.0.0.0', 8000), SimpleHTTPRequestHandler)
-server.serve_forever()
+    rendered_page = template.render(
+        wines=get_wines(wines_from_excel),
+        years=get_delta(),
+        correct_year=get_correct_year(get_delta()),
+    )
+
+    with open('index.html', 'w', encoding="utf8") as file:
+        file.write(rendered_page)
+
+    server = HTTPServer(('0.0.0.0', 8000), SimpleHTTPRequestHandler)
+    server.serve_forever()
+
+
+if __name__ == '__main__':
+    main()
