@@ -107,13 +107,13 @@
                         легенда, повествующая о появлении божественного эликсира — вина.
                     </p>
                 </div>
-                {% for category, wine_list in wines.items() %}
+                {% for category, wines_in_category in wines.items() %}
                 <div class="col-12 section-title text-center mb-5">
                     <h2 class="d-block">{{ category }}</h2>
                 </div>
 
                 <div class="row">
-                    {% for wine in wine_list %}
+                    {% for wine in wines_in_category %}
                     <div class="col-lg-4 mb-5 col-md-6">
                         <div class="wine_v_1 text-center pb-4 pt-5">
                             {% if wine['Акция'] == "" %}
