@@ -11,7 +11,7 @@ env = Environment(
 
 template = env.get_template('template.html')
 
-wines_from_excel = pandas.read_excel('wine3.xlsx', keep_default_na=False).to_dict(orient='records')
+wines_from_excel = pandas.read_excel('wine.xlsx', keep_default_na=False).to_dict(orient='records')
 
 
 def get_wines():
